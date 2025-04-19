@@ -5,8 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark';
-import oneLight from 'react-syntax-highlighter/dist/esm/styles/prism/one-light';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FiCopy } from 'react-icons/fi';
 
 interface MarkdownRendererProps {
@@ -14,12 +13,12 @@ interface MarkdownRendererProps {
 }
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
-  const [isDark, setIsDark] = useState(false);
-
+  const [isdark, setIsdark] = useState(false);
+console.log(isdark)
   // Detect the current theme based on <html class="dark">
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains('dark'));
+      setIsdark(document.documentElement.classList.contains('dark'));
     });
 
     observer.observe(document.documentElement, {
@@ -27,7 +26,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       attributeFilter: ['class'],
     });
 
-    setIsDark(document.documentElement.classList.contains('dark'));
+    setIsdark(document.documentElement.classList.contains('dark'));
     return () => observer.disconnect();
   }, []);
 
@@ -40,7 +39,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       toast.error('Failed to copy code. Please try manually.');
     }
   };
-
+  interface CodeProps extends React.HTMLAttributes<HTMLElement> {
+    inline?: boolean;
+  }
   return (
     <>
       <ReactMarkdown
@@ -48,7 +49,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
         rehypePlugins={[rehypeRaw]}
         components={{
           // Handle inline and block code
-          code({ inline, className, children, ...props }) {
+          code({ inline, className, children, ...props }:CodeProps) {
             const match = /language-(\w+)/.exec(className || '');
             const rawCode = String(children).replace(/\n$/, '');
             const isCustom = rawCode.startsWith('@@') && rawCode.endsWith('@@');
@@ -69,18 +70,18 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
                   </button>
 
                   <SyntaxHighlighter
-                    style={isDark ? oneDark : oneLight}
-                    language={match?.[1] || 'javascript'}
-                    customStyle={{
-                      padding: '1em',
-                      borderRadius: '6px',
-                      fontSize: '0.9rem',
-                      backgroundColor: 'inherit',
-                    }}
-                    {...props}
-                  >
-                    {cleanedCode}
-                  </SyntaxHighlighter>
+  style={oneDark as any}
+  language={match?.[1] || 'javascript'}
+  customStyle={{
+    padding: '1em',
+    borderRadius: '6px',
+    fontSize: '0.9rem',
+    backgroundColor: 'inherit',
+  }}
+  {...props}
+>
+  {cleanedCode}
+</SyntaxHighlighter>
                 </div>
               );
             }

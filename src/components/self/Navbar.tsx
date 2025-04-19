@@ -2,8 +2,6 @@
 import eye from "../../assets/view.png";
 import { ModeToggle } from "../mode-toggle";
 import { Button } from "@/components/ui/button";
-import { TypingAnimation } from "@/components/magicui/terminal";
-import Sidebar from "./sidebar";
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {

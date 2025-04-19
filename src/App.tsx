@@ -1,8 +1,8 @@
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import { ThemeProvider } from "@/components/theme-provider";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './page/home';
 import Login from './components/self/auth/Login';
 import Signup from './components/self/auth/Signup';
@@ -27,7 +27,7 @@ function App() {
       <Route path="/verify" element={<Otp />} />
     </Routes>
 </Router>
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+   
     </div>
       </ThemeProvider>
   );
