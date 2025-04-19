@@ -8,6 +8,9 @@ import Solvinger from './Solvinger';
 
 const Home = () => {
 
+  interface ApiResponse {
+    message: string;
+  }
   const [code, setCode] = useState('');
   const [inp, setInp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,8 +33,8 @@ const Home = () => {
       console.log(response.data)
 
       setInp(code)
-      const print = response.data || 'No review received.';
-      setReview(print);
+      const message = response.data.message || 'No review received.';
+      setReview(message);
 
 
 
