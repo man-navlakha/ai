@@ -1,6 +1,6 @@
-## Solvinger - The OG
+# Solvinger - The OG
 
-# Changes Log
+## Changes Log
 
 `0.0.0` : Created using Typescript
 `0.0.1` : added nesessry librarys like `tailwindcss`, `react-toastify`, `react-router-dom`, etc...
@@ -28,6 +28,10 @@
 `1.5.5` : Added routes
 `1.5.8` : added Login, signup & Forget
 `1.5.9` : added Verify page
+.
+.
+.
+`1.6.1` : Netlify added 
 .
 .
 .
